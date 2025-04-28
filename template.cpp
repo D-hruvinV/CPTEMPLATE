@@ -20,6 +20,19 @@ using namespace std ;
 const int M = 1000000007;
 const int MM = 998244353;
 
+vector<bool> findprime(ll N){
+    vector<bool> is_prime(N + 1, true);
+    is_prime[0] = is_prime[1] = false;
+
+    for (int i = 2; i * i <= N; ++i) {
+        if (is_prime[i]) {
+            for (int j = i * i; j <= N; j += i) {
+                is_prime[j] = false;
+            }
+        }
+    }
+    return is_prime;
+}
 
 long long binpow(long long a, long long b, long long m) {
     a %= m;
