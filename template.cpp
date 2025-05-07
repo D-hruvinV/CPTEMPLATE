@@ -171,6 +171,28 @@ ll nCr(ll n , ll r){
     return res;
 }
 
+//dijkstra algo
+void dijkstra(int k ,vector<vector<pair<int,int>>>& graph ,vector<int>& distance ,vector<int>& vis){
+    set<pair<int,int>> st;
+    st.insert({0 , k});
+    distance[k] = 0;
+    while(st.size() > 0){
+        int node = (*st.begin()).second;
+        int wt = (*st.begin()).first;
+        st.erase(st.begin());
+        if(vis[node]) continue;
+        vis[node] = 1;
+        for(auto& child : graph[node]){
+            int ch = child.first;
+            int chwt = child.second;
+            if(wt + chwt < distance[ch]){
+                distance[ch] = wt + chwt;
+                st.insert({distance[ch] , ch});
+            }
+        }
+    }
+}
+
 void ChineseBheL()
 {
   
