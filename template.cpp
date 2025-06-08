@@ -134,6 +134,16 @@ vector<bool> findprime(ll N){
     return is_prime;
 }
 
+//seive to find all factors
+vector<vector<ll>> factors(1e6+1);
+void findfactors(){
+    for (int i = 1; i <= 1e6+1; i++) {
+        for(int j = i ; j <= 1e6+1 ; j+=i){
+            factors[j].push_back(i);
+        }
+    }
+}
+
 //binexpo
 long long binpow(long long a, long long b, long long m) {
     a %= m;
