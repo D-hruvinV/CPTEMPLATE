@@ -203,6 +203,25 @@ void dijkstra(int k ,vector<vector<pair<int,int>>>& graph ,vector<int>& distance
     }
 }
 
+//sparse table
+vector<vector<ll>> createSPT(vector<ll>& lg , vector<ll>& v){
+    ll N = v.size();
+    if(N>1) lg[1] = 0;
+    for (int i = 2; i < N; i++) lg[i] = lg[i/2] + 1;
+    ll K = 25;
+    vector<vector<ll>> st(K+1 , vector<ll>(N));
+    for(int i=0 ; i < N ; i++) st[0][i] = v[i];
+
+    for (int i = 1; i <= K; i++)
+        for (int j = 0; j + (1 << i)-1 < N; j++)
+            st[i][j] = min(st[i - 1][j], st[i - 1][j + (1 << (i - 1))]);
+    /*  queries      
+    ll i = lg[R - L + 1];
+    ll minimum = min(st[i][L], st[i][R - (1 << i) + 1]);    
+    */
+    return st;    
+}
+
 void ChineseBheL()
 {
   
